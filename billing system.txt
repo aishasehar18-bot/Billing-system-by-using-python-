@@ -1,0 +1,48 @@
+items = {
+    "Burger": 250,
+    "Pizza": 600,
+    "Fries": 150,
+    "Drink": 100
+}
+
+bill = {}
+
+print("------ MENU ------")
+for item, price in items.items():
+    print(f"{item} : Rs {price}")
+print("------------------\n")
+
+while True:
+    choice = input("Enter item name (or 'done'): ")
+
+    if choice.lower() == "done":
+        break
+
+    if choice not in items:
+        print("Item not found! Try again.\n")
+        continue
+
+    qty = int(input(f"Enter quantity of {choice}: "))
+    bill[choice] = bill.get(choice, 0) + qty
+    print("Added!\n")
+
+# BILL PRINTING
+print("\n---------- BILL ----------")
+total = 0
+
+for item, qty in bill.items():
+    price = items[item] * qty
+    print(f"{item} x {qty} = Rs {price}")
+    total += price
+
+print("--------------------------")
+print("Subtotal:", total)
+
+discount = 0
+if total > 1000:
+    discount = total * 0.10
+    print("Discount (10%):", discount)
+
+final = total - discount
+print("Final Amount:", final)
+print("--------------------------")
